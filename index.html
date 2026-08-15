@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clarity — AI Image Enhancer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <nav class="nav shell">
+      <a class="brand" href="#"><span class="brand-mark">✦</span> clarity</a>
+      <div class="nav-links"><a href="#how-it-works">How it works</a><a href="#quality">Quality</a></div>
+      <button class="nav-action" id="tryNow">Try it free <span>↗</span></button>
+    </nav>
+
+    <main>
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><i></i> AI IMAGE RESTORATION</p>
+          <h1>Make every<br /><em>detail</em> matter.</h1>
+          <p class="lede">Restore the sharpness, texture, and life hiding in your photos. One upload is all it takes.</p>
+          <div class="hero-proof"><div class="avatars"><b>J</b><b>L</b><b>M</b><b>+</b></div><span>Trusted by <strong>12,000+</strong> creators</span></div>
+        </div>
+        <div class="hero-art" aria-label="Photo enhancement preview">
+          <div class="art-card before-card"><span>BEFORE</span><div class="fake-photo soft-photo"></div></div>
+          <div class="art-card after-card"><span>AFTER</span><div class="fake-photo sharp-photo"></div><div class="spark s1">✦</div><div class="spark s2">✦</div></div>
+          <div class="floating-chip"><span class="chip-icon">✦</span><div><b>Enhancement complete</b><small>4× resolution · 98% restored</small></div><span class="chip-check">✓</span></div>
+        </div>
+      </section>
+
+      <section class="workspace shell" id="quality">
+        <div class="section-heading"><div><p class="eyebrow"><i></i> YOUR STUDIO</p><h2>Give your image<br />a second chance.</h2></div><p>Upload a photo and our model will intelligently remove noise, restore details, and upscale it to crisp HD.</p></div>
+        <div class="editor" id="editor">
+          <aside class="settings">
+            <div class="setting-top"><span class="step">01</span><span>ENHANCEMENT SETTINGS</span></div>
+            <label class="setting-label">Restoration strength <output id="strengthValue">75%</output></label>
+            <input type="range" id="strength" min="10" max="100" value="75" />
+            <div class="setting-group"><span class="setting-label">Output resolution</span><div class="pills"><button class="pill" data-scale="2">2×</button><button class="pill active" data-scale="4">4× HD</button></div></div>
+            <label class="toggle-row"><span>Face recovery <small>Refine facial features</small></span><input type="checkbox" checked /><i></i></label>
+            <label class="toggle-row"><span>Remove noise <small>Clean grain & artifacts</small></span><input type="checkbox" checked /><i></i></label>
+            <button class="enhance-btn" id="enhanceBtn" disabled><span>✦</span> Enhance image <b>→</b></button>
+            <p class="privacy">Your images are processed privately and never stored.</p>
+          </aside>
+          <div class="canvas-panel">
+            <div class="canvas-top"><div class="tabs"><button class="active" data-view="original">Original</button><button data-view="enhanced">Enhanced</button></div><span class="file-info" id="fileInfo">No image selected</span></div>
+            <label class="drop-zone" id="dropZone" for="fileInput">
+              <input type="file" id="fileInput" accept="image/*" />
+              <div class="upload-icon">↑</div><h3>Drop your image here</h3><p>or <u>browse your files</u></p><small>JPG, PNG, WEBP · up to 20MB</small>
+            </label>
+            <div class="image-stage hidden" id="imageStage">
+              <div class="image-frame"><img id="displayImage" alt="Selected image preview" /><div class="scan-line" id="scanLine"></div></div>
+              <div class="comparison-label"><span id="comparisonText">ORIGINAL</span><span id="resolutionText">—</span></div>
+            </div>
+            <div class="processing hidden" id="processing"><div class="orb">✦</div><h3>Rebuilding every detail</h3><p id="progressText">Preparing your image…</p><div class="progress"><span id="progressBar"></span></div></div>
+            <div class="result-actions hidden" id="resultActions"><button class="secondary" id="startOver">↻ Start over</button><button class="download" id="downloadBtn">Download HD <span>↓</span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features shell" id="how-it-works"><p class="eyebrow"><i></i> BUILT FOR THE DETAILS</p><div class="feature-grid"><article><span>01</span><h3>Smart denoise</h3><p>Erase compression artifacts and grain while preserving the texture that makes an image feel real.</p></article><article><span>02</span><h3>True detail recovery</h3><p>Our model reconstructs missing details naturally, from individual hairs to distant architecture.</p></article><article><span>03</span><h3>Studio-grade output</h3><p>Get a pristine high-resolution image, ready to share, print, or bring into your next project.</p></article></div></section>
+    </main>
+    <footer class="shell"><a class="brand" href="#"><span class="brand-mark">✦</span> clarity</a><span>© 2024 Clarity Labs</span><span>Made for better memories.</span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
