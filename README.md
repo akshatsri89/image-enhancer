@@ -1,32 +1,36 @@
-# Clarity — AI Image Enhancer
+# Elviora AI Image Enhancer
 
-A static web app for uploading a photo, adjusting enhancement settings, previewing a restored result, and downloading it.
+This app performs genuine restoration with the Real-ESRGAN model: it removes noise, recovers detail, upscales the image, and can apply face recovery. The browser sends each request to the server-side `api/` routes; the Replicate API token is never exposed to visitors.
 
-## Publish it on GitHub Pages
+## Deploy from GitHub to Vercel
 
-1. Create a new GitHub repository, for example `image-enhancer`.
-2. In this project folder, run the commands below, replacing `YOUR-USERNAME` with your GitHub account name:
+Vercel is required instead of GitHub Pages for the live app because GitHub Pages cannot run the secure API route that calls the AI model.
+
+1. Create a new GitHub repository and push this project:
 
    ```powershell
    git add .
-   git commit -m "Add Clarity image enhancer"
+   git commit -m "Add AI image restoration"
    git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/image-enhancer.git
+   git remote add origin https://github.com/YOUR-USERNAME/elviora-image-enhancer.git
    git push -u origin main
    ```
 
-3. Open the repository on GitHub, then go to **Settings → Pages**.
-4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-5. Wait for the **Deploy website to GitHub Pages** workflow to finish in the **Actions** tab.
+2. Create a [Replicate](https://replicate.com) account and make an API token.
+3. Import the GitHub repository in [Vercel](https://vercel.com/new). The default settings work for this project.
+4. In Vercel **Settings → Environment Variables**, add:
 
-Your site will be available at:
+   ```
+   REPLICATE_API_TOKEN = r8_your_token
+   ```
 
-```
-https://YOUR-USERNAME.github.io/image-enhancer/
-```
+5. Redeploy. Vercel will provide the public URL, such as `https://elviora-image-enhancer.vercel.app`.
 
-Every future push to `main` automatically deploys the latest version. The workflow also supports the existing `master` branch until it is renamed.
+Every push to `main` will create a new Vercel deployment automatically. GitHub Actions runs syntax validation for the website and API routes on every push and pull request.
 
-## Important limitation
+## Notes
 
-This is a client-side demo: it applies a visual presentation of enhancement and downloads the uploaded image. For actual AI denoising/upscaling, connect the Enhance button to an AI image-restoration API or backend; never put a private API key in `app.js`.
+- The app uses `nightmareai/real-esrgan`, with selectable 2× or 4× output and face recovery.
+- Large uploads are resized client-side to keep the server request fast and reliable.
+- Real-ESRGAN is a restoration/upscaling model, not a magic reconstruction tool: it works best on moderate blur/noise and cannot reliably recreate detail that is completely absent.
+- The model is billed by Replicate (currently listed at $2 per thousand output images). Set billing and usage limits in your Replicate account before publishing publicly.
