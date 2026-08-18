@@ -19,6 +19,3 @@ jobs:
       - name: Validate JavaScript syntax
         run: |
           node --check app.js
-          node --check api/enhance.js
-          node --check 'api/prediction/[id].js'
-          node --check api/health.js

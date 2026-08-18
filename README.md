@@ -1,36 +1,21 @@
 # Elviora AI Image Enhancer
 
-This app performs genuine restoration with the Real-ESRGAN model: it removes noise, recovers detail, upscales the image, and can apply face recovery. The browser sends each request to the server-side `api/` routes; the Replicate API token is never exposed to visitors.
+This is a free, browser-based AI image upscaler. It runs an ESRGAN neural network on the visitor's device, so uploaded images stay in the browser and no API keys, credits, or server-side AI provider are required.
 
-## Deploy from GitHub to Vercel
+## Deploy
 
-Vercel is required instead of GitHub Pages for the live app because GitHub Pages cannot run the secure API route that calls the AI model.
+Push this project to GitHub and deploy it on Vercel or GitHub Pages. It is now a static website; no environment variables are needed.
 
-1. Create a new GitHub repository and push this project:
+```powershell
+git add .
+git commit -m "Use browser-based AI upscaling"
+git push
+```
 
-   ```powershell
-   git add .
-   git commit -m "Add AI image restoration"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/elviora-image-enhancer.git
-   git push -u origin main
-   ```
-
-2. Create a [Replicate](https://replicate.com) account and make an API token.
-3. Import the GitHub repository in [Vercel](https://vercel.com/new). The default settings work for this project.
-4. In Vercel **Settings → Environment Variables**, add:
-
-   ```
-   REPLICATE_API_TOKEN = r8_your_token
-   ```
-
-5. Redeploy. Vercel will provide the public URL, such as `https://elviora-image-enhancer.vercel.app`.
-
-Every push to `main` will create a new Vercel deployment automatically. GitHub Actions runs syntax validation for the website and API routes on every push and pull request.
+Vercel will automatically deploy the latest GitHub commit. The AI model is downloaded from the UpscalerJS CDN the first time a visitor enhances an image, so the first use can take a little longer.
 
 ## Notes
 
-- The app uses `nightmareai/real-esrgan`, with selectable 2× or 4× output and face recovery.
-- Large uploads are resized client-side to keep the server request fast and reliable.
-- Real-ESRGAN is a restoration/upscaling model, not a magic reconstruction tool: it works best on moderate blur/noise and cannot reliably recreate detail that is completely absent.
-- The model is billed by Replicate (currently listed at $2 per thousand output images). Set billing and usage limits in your Replicate account before publishing publicly.
+- 2× output is best for most images. 4× runs two local model passes and can be slow on phones or older laptops.
+- Images larger than 1100px on their longest side are resized before enhancement to protect browser memory.
+- This is local super-resolution. It improves detail and resolution, but it cannot reliably recreate information that is completely missing from an extremely blurred image.
